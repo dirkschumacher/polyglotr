@@ -9,3 +9,8 @@ test_that("rust works", {
 test_that("asc works", {
   expect_equal(fib_assemblyscript(20), 6765)
 })
+
+test_that("go works", {
+  expect_equal(fib_go(20), 6765)
+})
+

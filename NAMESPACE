@@ -2,4 +2,5 @@
 
 export(fib_assemblyscript)
 export(fib_c)
+export(fib_go)
 export(fib_rust)

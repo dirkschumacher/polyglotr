@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# Use C, Rust and Assemblyscript in an R pacakge
+# Use C, Rust, Go and Assemblyscript in an R package through WebAssembly
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -43,16 +43,20 @@ Each of the following functions calls a bundled binary `wasm` file in the `inst`
 fib_c(20)
 fib_rust(20)
 fib_assemblyscript(20)
+fib_go(20)
 fib_r(20)
 ```
 
-The benchmark is not meant to compare different compilers, just to give a rough feeling about timing.
+The benchmark is not meant to compare different compilers, just to give a rough feeling about timing. In fact most of the compilers will probably emit very similiar `wasm` code. Also each function call reads the `wasm` file from disk and instantiates it.
+
+I also used `tinygo` to compile the go code which adds some interface code resulting in a 4kb file. There might be flags to further optimize the generated code.
 
 ```{r}
 bench::mark(
   fib_c(20),
   fib_rust(20),
   fib_assemblyscript(20),
+  fib_go(20),
   fib_r(20)
 )
 ```
