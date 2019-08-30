@@ -30,8 +30,8 @@ fib_r <- function(n) {
 }
 ```
 
-Each of the following functions calls a bundled binary `wasm` file
-`inst` directory that was compiled from the respective language. The
+Each of the following functions calls a bundled binary `wasm` file in
+the `inst` directory that was compiled from the respective language. The
 binary file is distributed with the package, but not necessarily the
 source files. The user does not need to compile anything (apart from the
 `wasmr` package).
@@ -59,8 +59,8 @@ bench::mark(
 #> # A tibble: 4 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                1.34ms    2.1ms     284.     11.9KB     2.15
-#> 2 fib_rust(20)             1.31ms   1.67ms     439.     11.8KB     2.04
-#> 3 fib_assemblyscript(20)   13.1ms  16.42ms      53.9    16.5KB     2.07
-#> 4 fib_r(20)               14.14ms  17.31ms      54.7        0B    23.0
+#> 1 fib_c(20)                1.21ms   1.59ms     446.     11.9KB     2.05
+#> 2 fib_rust(20)              1.2ms   1.39ms     575.     11.8KB     2.04
+#> 3 fib_assemblyscript(20)  11.87ms  13.01ms      68.4    16.5KB     0   
+#> 4 fib_r(20)               13.32ms  14.55ms      54.1        0B    25.5
 ```

@@ -37,7 +37,7 @@ fib_r <- function(n) {
 ```
 
 
-Each of the following functions calls a bundled binary `wasm` file `inst` directory that was compiled from the respective language. The binary file is distributed with the package, but not necessarily the source files. The user does not need to compile anything (apart from the `wasmr` package).
+Each of the following functions calls a bundled binary `wasm` file in the `inst` directory that was compiled from the respective language. The binary file is distributed with the package, but not necessarily the source files. The user does not need to compile anything (apart from the `wasmr` package).
 
 ```{r}
 fib_c(20)
@@ -45,7 +45,6 @@ fib_rust(20)
 fib_assemblyscript(20)
 fib_r(20)
 ```
-
 
 To be fair, the assemblyscript wasm is 6kb.
 
