@@ -46,7 +46,7 @@ fib_assemblyscript(20)
 fib_r(20)
 ```
 
-The benchmark is not really meant to compare different compilers, just to give a feeling about timing.
+The benchmark is not meant to compare different compilers, just to give a rough feeling about timing.
 
 ```{r}
 bench::mark(
