@@ -10,20 +10,7 @@ fib_c <- function(n) {
 #' @param n an integer >= 1
 #' @export
 fib_assemblyscript <- function(n) {
-  wasm_path <- system.file("wasm", "fib_asc.wasm", package = "polyglotr")
-  imports <- list(
-    env = list(
-      abort = wasmr::typed_function(
-        function(a, b, c, d) {
-          0
-        },
-        param_types = c("I32", "I32", "I32", "I32"),
-        return_type = character()
-      )
-    )
-  )
-  instance <- wasmr::instantiate(wasm_path, imports)
-  instance$exports$fib(n)
+  make_fib_fun("fib_asc.wasm")(n)
 }
 
 #' Fibonacci number in Rust

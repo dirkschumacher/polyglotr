@@ -46,7 +46,7 @@ fib_assemblyscript(20)
 fib_r(20)
 ```
 
-To be fair, the assemblyscript wasm is 6kb.
+The benchmark is not really meant to compare different compilers, just to give a feeling about timing.
 
 ```{r}
 bench::mark(

@@ -47,7 +47,8 @@ fib_r(20)
 #> [1] 6765
 ```
 
-To be fair, the assemblyscript wasm is 6kb.
+The benchmark is not really meant to compare different compilers, just
+to give a feeling about timing.
 
 ``` r
 bench::mark(
@@ -59,8 +60,8 @@ bench::mark(
 #> # A tibble: 4 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                1.21ms   1.59ms     446.     11.9KB     2.05
-#> 2 fib_rust(20)              1.2ms   1.39ms     575.     11.8KB     2.04
-#> 3 fib_assemblyscript(20)  11.87ms  13.01ms      68.4    16.5KB     0   
-#> 4 fib_r(20)               13.32ms  14.55ms      54.1        0B    25.5
+#> 1 fib_c(20)                1.47ms   1.95ms     269.     12.2KB     2.08
+#> 2 fib_rust(20)              1.2ms   1.44ms     531.     12.1KB     2.03
+#> 3 fib_assemblyscript(20)   1.17ms   1.31ms     596.     11.4KB     4.21
+#> 4 fib_r(20)               13.44ms  15.73ms      59.8        0B    26.9
 ```
