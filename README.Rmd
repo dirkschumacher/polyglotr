@@ -27,14 +27,24 @@ The goal of `polyglotr` is just to show how you can use three different language
 library(polyglotr)
 ```
 
+The package exposes an inefficient, recursive fibonacci algorithm written in languages that can compile to WebAssembly.
+
+```{r}
+fib_r <- function(n) {
+  if (n < 2) return(n)
+  Recall(n - 1) + Recall(n - 2)
+}
+```
+
+
 Each of the following functions calls a bundled binary `wasm` file `inst` directory that was compiled from the respective language. The binary file is distributed with the package, but not necessarily the source files. The user does not need to compile anything (apart from the `wasmr` package).
 
 ```{r}
 fib_c(20)
 fib_rust(20)
 fib_assemblyscript(20)
+fib_r(20)
 ```
-
 
 
 To be fair, the assemblyscript wasm is 6kb.
@@ -43,7 +53,8 @@ To be fair, the assemblyscript wasm is 6kb.
 bench::mark(
   fib_c(20),
   fib_rust(20),
-  fib_assemblyscript(20)
+  fib_assemblyscript(20),
+  fib_r(20)
 )
 ```
 

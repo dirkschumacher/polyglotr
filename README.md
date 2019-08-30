@@ -19,6 +19,16 @@ languages through WebAssembly in an R package using
 library(polyglotr)
 ```
 
+The package exposes an inefficient, recursive fibonacci algorithm
+written in languages that can compile to WebAssembly.
+
+``` r
+fib_r <- function(n) {
+  if (n < 2) return(n)
+  Recall(n - 1) + Recall(n - 2)
+}
+```
+
 Each of the following functions calls a bundled binary `wasm` file
 `inst` directory that was compiled from the respective language. The
 binary file is distributed with the package, but not necessarily the
@@ -32,6 +42,8 @@ fib_rust(20)
 #> [1] 6765
 fib_assemblyscript(20)
 #> [1] 6765
+fib_r(20)
+#> [1] 6765
 ```
 
 To be fair, the assemblyscript wasm is 6kb.
@@ -40,12 +52,14 @@ To be fair, the assemblyscript wasm is 6kb.
 bench::mark(
   fib_c(20),
   fib_rust(20),
-  fib_assemblyscript(20)
+  fib_assemblyscript(20),
+  fib_r(20)
 )
-#> # A tibble: 3 x 6
+#> # A tibble: 4 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                1.33ms   1.56ms     476.     11.9KB     2.05
-#> 2 fib_rust(20)             1.28ms   1.59ms     402.     11.8KB     2.01
-#> 3 fib_assemblyscript(20)   22.4ms  32.35ms      29.4    16.5KB     0
+#> 1 fib_c(20)                1.24ms   1.53ms     354.     11.9KB     2.02
+#> 2 fib_rust(20)             1.18ms   1.39ms     558.     11.8KB     2.04
+#> 3 fib_assemblyscript(20)  11.82ms  13.73ms      65.7    16.5KB     0   
+#> 4 fib_r(20)                13.1ms  14.96ms      58.3        0B    26.2
 ```
