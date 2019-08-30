@@ -36,6 +36,17 @@ fib_r <- function(n) {
 }
 ```
 
+As a comparison we also add an `rcpp` version. In particular it shows what the overhead of opening the `wasm` file and calling it currently is.
+
+```{r}
+Rcpp::cppFunction("
+int fib_rcpp(int n) {
+  if (n < 2) return n;
+  return fib_rcpp(n - 1) + fib_rcpp(n - 2);
+}
+")
+```
+
 
 Each of the following functions calls a bundled binary `wasm` file in the `inst` directory that was compiled from the respective language. The binary file is distributed with the package, but not necessarily the source files. The user does not need to compile anything (apart from the `wasmr` package).
 
@@ -45,6 +56,7 @@ fib_rust(20)
 fib_assemblyscript(20)
 fib_go(20)
 fib_r(20)
+fib_rcpp(20)
 ```
 
 The benchmark is not meant to compare different compilers, just to give a rough feeling about timing. In fact most of the compilers will probably emit very similiar `wasm` code. Also each function call reads the `wasm` file from disk and instantiates it.
@@ -57,7 +69,7 @@ bench::mark(
   fib_rust(20),
   fib_assemblyscript(20),
   fib_go(20),
-  fib_r(20)
+  fib_r(20),
+  fib_rcpp(20)
 )
 ```
-

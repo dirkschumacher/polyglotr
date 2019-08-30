@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Use C, Rust and Assemblyscript in an R pacakge
+# Use C, Rust, Go and Assemblyscript in an R package through WebAssembly
 
 <!-- badges: start -->
 
@@ -30,6 +30,19 @@ fib_r <- function(n) {
 }
 ```
 
+As a comparison we also add an `rcpp` version. In particular it shows
+what the overhead of opening the `wasm` file and calling it currently
+is.
+
+``` r
+Rcpp::cppFunction("
+int fib_rcpp(int n) {
+  if (n < 2) return n;
+  return fib_rcpp(n - 1) + fib_rcpp(n - 2);
+}
+")
+```
+
 Each of the following functions calls a bundled binary `wasm` file in
 the `inst` directory that was compiled from the respective language. The
 binary file is distributed with the package, but not necessarily the
@@ -46,6 +59,8 @@ fib_assemblyscript(20)
 fib_go(20)
 #> [1] 6765
 fib_r(20)
+#> [1] 6765
+fib_rcpp(20)
 #> [1] 6765
 ```
 
@@ -64,14 +79,16 @@ bench::mark(
   fib_rust(20),
   fib_assemblyscript(20),
   fib_go(20),
-  fib_r(20)
+  fib_r(20),
+  fib_rcpp(20)
 )
-#> # A tibble: 5 x 6
+#> # A tibble: 6 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                1.21ms   1.39ms     439.     12.2KB     2.07
-#> 2 fib_rust(20)             1.19ms   1.32ms     618.     12.1KB     2.03
-#> 3 fib_assemblyscript(20)   1.17ms   1.27ms     661.     11.4KB     4.29
-#> 4 fib_go(20)               2.75ms   2.98ms     280.     15.7KB     2.06
-#> 5 fib_r(20)               14.17ms  14.79ms      60.4        0B    33.5
+#> 1 fib_c(20)                1.19ms   1.36ms     599.    12.21KB     4.15
+#> 2 fib_rust(20)              1.2ms   1.35ms     604.    12.13KB     2.04
+#> 3 fib_assemblyscript(20)   1.17ms    1.3ms     622.    11.38KB     4.20
+#> 4 fib_go(20)               2.71ms   3.04ms     281.    15.71KB     2.08
+#> 5 fib_r(20)               13.48ms  14.12ms      64.3        0B    33.8 
+#> 6 fib_rcpp(20)            42.25µs  44.58µs   20531.     8.72KB     0
 ```
