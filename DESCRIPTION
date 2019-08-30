@@ -1,0 +1,19 @@
+Package: polyglotr
+Title: Use Other Languages in R Through WebAssembly
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Dirk",
+           family = "Schumacher",
+           role = c("aut", "cre"),
+           email = "mail@dirk-schumacher.net")
+Description: R with many languages.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Remotes:
+  dirkschumacher/wasmr
+Suggests: 
+    testthat (>= 2.1.0)
+RoxygenNote: 6.1.1
+Imports: 
+    wasmr
