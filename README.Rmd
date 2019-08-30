@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of `polyglotr` is just to show how you can use three different languages through WebAssembly in an R package using [wasmr](https://github.com/dirkschumacher/wasmr).
+The goal of `polyglotr` is just to show how you can use three different languages through WebAssembly in an R package using [wasmr](https://github.com/dirkschumacher/wasmr). All of this is very experimental.
 
 ## Example
 

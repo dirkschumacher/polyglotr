@@ -11,7 +11,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 The goal of `polyglotr` is just to show how you can use three different
 languages through WebAssembly in an R package using
-[wasmr](https://github.com/dirkschumacher/wasmr).
+[wasmr](https://github.com/dirkschumacher/wasmr). All of this is very
+experimental.
 
 ## Example
 
@@ -58,8 +59,8 @@ bench::mark(
 #> # A tibble: 4 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                1.24ms   1.53ms     354.     11.9KB     2.02
-#> 2 fib_rust(20)             1.18ms   1.39ms     558.     11.8KB     2.04
-#> 3 fib_assemblyscript(20)  11.82ms  13.73ms      65.7    16.5KB     0   
-#> 4 fib_r(20)                13.1ms  14.96ms      58.3        0B    26.2
+#> 1 fib_c(20)                1.34ms    2.1ms     284.     11.9KB     2.15
+#> 2 fib_rust(20)             1.31ms   1.67ms     439.     11.8KB     2.04
+#> 3 fib_assemblyscript(20)   13.1ms  16.42ms      53.9    16.5KB     2.07
+#> 4 fib_r(20)               14.14ms  17.31ms      54.7        0B    23.0
 ```
