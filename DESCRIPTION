@@ -13,11 +13,10 @@ LazyData: true
 Remotes:
   dirkschumacher/wasmr
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    Rcpp
 RoxygenNote: 6.1.1
 Imports: 
     wasmr
-Suggests:
-    Rcpp
 URL: https://github.com/dirkschumacher/polyglotr
 BugReports: https://github.com/dirkschumacher/polyglotr/issues
