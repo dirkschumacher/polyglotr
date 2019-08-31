@@ -2,7 +2,6 @@
 #' @param n an integer >= 1
 #' @export
 fib_c <- function(n) {
-  check_input(n)
   make_fib_fun("fib_c.wasm")(n)
 }
 
@@ -17,7 +16,6 @@ fib_assemblyscript <- function(n) {
 #' @param n an integer >= 1
 #' @export
 fib_rust <- function(n) {
-  check_input(n)
   make_fib_fun("fib_rust.wasm")(n)
 }
 
@@ -25,7 +23,6 @@ fib_rust <- function(n) {
 #' @param n an integer >= 1
 #' @export
 fib_go <- function(n) {
-  check_input(n)
   imports <- list(
     env = list(
       io_get_stdout = wasmr::typed_function(
@@ -51,12 +48,4 @@ make_fib_fun <- function(wasm_file_name, imports = list()) {
   wasm_path <- system.file("wasm", wasm_file_name, package = "polyglotr")
   instance <- wasmr::instantiate(wasm_path, imports)
   instance$exports$fib
-}
-
-check_input <- function(n) {
-  stopifnot(
-    length(n) == 1,
-    is.numeric(n),
-    n >= 1
-  )
 }
