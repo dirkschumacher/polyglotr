@@ -32,7 +32,7 @@ The package exposes an inefficient, recursive fibonacci algorithm written in lan
 ```{r}
 fib_r <- function(n) {
   if (n < 2) return(n)
-  Recall(n - 1) + Recall(n - 2)
+  fib_r(n - 1) + fib_r(n - 2)
 }
 ```
 
@@ -47,7 +47,6 @@ int fib_rcpp(int n) {
 ")
 ```
 
-
 Each of the following functions calls a bundled binary `wasm` file in the `inst` directory that was compiled from the respective language. The binary file is distributed with the package, but not necessarily the source files. The user does not need to compile anything (apart from the `wasmr` package).
 
 ```{r}
@@ -59,7 +58,7 @@ fib_r(20)
 fib_rcpp(20)
 ```
 
-The benchmark is not meant to compare different compilers, just to give a rough feeling about timing. In fact most of the compilers will probably emit very similiar `wasm` code. Also each function call reads the `wasm` file from disk and instantiates it.
+The benchmark is not meant to compare different compilers, just to give a rough feeling about timing. In fact most of the compilers will probably emit very similiar `wasm` code. The `wasm` module is read and instantiated upon package load.
 
 I also used `tinygo` to compile the go code which adds some interface code resulting in a 4kb file. There might be flags to further optimize the generated code.
 

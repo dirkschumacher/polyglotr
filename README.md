@@ -26,7 +26,7 @@ written in languages that can compile to WebAssembly.
 ``` r
 fib_r <- function(n) {
   if (n < 2) return(n)
-  Recall(n - 1) + Recall(n - 2)
+  fib_r(n - 1) + fib_r(n - 2)
 }
 ```
 
@@ -66,8 +66,8 @@ fib_rcpp(20)
 
 The benchmark is not meant to compare different compilers, just to give
 a rough feeling about timing. In fact most of the compilers will
-probably emit very similiar `wasm` code. Also each function call reads
-the `wasm` file from disk and instantiates it.
+probably emit very similiar `wasm` code. The `wasm` module is read and
+instantiated upon package load.
 
 I also used `tinygo` to compile the go code which adds some interface
 code resulting in a 4kb file. There might be flags to further optimize
@@ -85,10 +85,10 @@ bench::mark(
 #> # A tibble: 6 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                69.5µs   73.1µs   10876.     2.49KB     2.03
-#> 2 fib_rust(20)             69.2µs   70.6µs   12072.     2.49KB     2.01
-#> 3 fib_assemblyscript(20)   69.2µs   70.5µs   12993.     2.49KB     2.02
-#> 4 fib_go(20)               69.6µs   71.1µs   12831.     2.49KB     2.01
-#> 5 fib_r(20)                13.5ms   14.5ms      62.9        0B    25.7 
-#> 6 fib_rcpp(20)             42.1µs   42.7µs   22034.     8.72KB     0
+#> 1 fib_c(20)               69.58µs  73.33µs     9768.    2.49KB     2.01
+#> 2 fib_rust(20)            68.99µs  70.73µs    12450.    2.49KB     4.10
+#> 3 fib_assemblyscript(20)  69.09µs  70.82µs    11648.    2.49KB     2.02
+#> 4 fib_go(20)               69.5µs  70.89µs    12155.    2.49KB     2.02
+#> 5 fib_r(20)                8.06ms   8.82ms      106.        0B    24.4 
+#> 6 fib_rcpp(20)            42.08µs  43.19µs    21261.    8.72KB     0
 ```
