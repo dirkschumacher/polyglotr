@@ -85,10 +85,10 @@ bench::mark(
 #> # A tibble: 6 x 6
 #>   expression                  min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr>             <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 fib_c(20)                1.22ms   1.42ms     546.    12.21KB     2.08
-#> 2 fib_rust(20)              1.2ms   1.36ms     581.    12.13KB     2.03
-#> 3 fib_assemblyscript(20)    1.2ms   1.37ms     569.    11.38KB     2.05
-#> 4 fib_go(20)                2.7ms   3.09ms     249.    15.71KB     2.04
-#> 5 fib_r(20)               14.08ms   17.3ms      51.6        0B    27.3 
-#> 6 fib_rcpp(20)            42.23µs  44.71µs   18351.     8.72KB     0
+#> 1 fib_c(20)                69.5µs   73.1µs   10876.     2.49KB     2.03
+#> 2 fib_rust(20)             69.2µs   70.6µs   12072.     2.49KB     2.01
+#> 3 fib_assemblyscript(20)   69.2µs   70.5µs   12993.     2.49KB     2.02
+#> 4 fib_go(20)               69.6µs   71.1µs   12831.     2.49KB     2.01
+#> 5 fib_r(20)                13.5ms   14.5ms      62.9        0B    25.7 
+#> 6 fib_rcpp(20)             42.1µs   42.7µs   22034.     8.72KB     0
 ```
